@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrito - ACE MAGIC</title>
+<style>
+body { font-family: Arial,sans-serif; margin:20px; }
+table { width:100%; border-collapse: collapse; margin-top:20px; }
+th, td { border:1px solid #ccc; padding:10px; text-align:center; }
+button { padding:8px 12px; margin:5px; }
+</style>
+</head>
+<body>
+<h1>Carrito de Compras</h1>
+<table>
+<thead>
+<tr>
+<th>Producto</th>
+<th>Precio</th>
+<th>Acción</th>
+</tr>
+</thead>
+<tbody id="carrito-lista"></tbody>
+</table>
+<p><strong>Total:</strong> $<span id="total">0</span> COP</p>
+<script>
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const lista = document.getElementById("carrito-lista");
+const totalElement = document.getElementById("total");
+
+function mostrarCarrito() {
+    lista.innerHTML = "";
+    let total = 0;
+    carrito.forEach((item, index) => {
+        total += item.precio;
+        lista.innerHTML += `
+            <tr>
+                <td>${item.nombre}</td>
+                <td>$${item.precio}</td>
+                <td><button onclick="eliminar(${index})">Eliminar</button></td>
+            </tr>`;
+    });
+    totalElement.textContent = total;
+}
+
+function eliminar(index) {
+    carrito.splice(index, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+mostrarCarrito();
+</script>
+</body>
+</html>

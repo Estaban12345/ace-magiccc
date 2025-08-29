@@ -1,0 +1,196 @@
+ 
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda ACE MAGIC</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f8fb; }
+header { background: linear-gradient(90deg, #004aad, #5de0e6); color:white; text-align:center; padding:20px; position:relative; }
+header img { width:150px; display:block; margin:0 auto; }
+nav a { color:white; text-decoration:none; margin:0 10px; font-weight:bold; }
+nav a:hover { color:#5de0e6; }
+
+.cart-btn {
+    position:absolute;
+    top:20px;
+    right:20px;
+    background:#fff;
+    color:#004aad;
+    font-weight:bold;
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+.cart-btn:hover {
+    background:#5de0e6;
+    color:#fff;
+}
+
+.products { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; padding:20px; }
+.product { background:#fff; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); padding:15px; text-align:center; }
+.product img { width:100%; border-radius:10px; }
+.price { font-weight:bold; color:#004aad; margin:10px 0; font-size:18px; }
+button { background:#004aad; color:#fff; border:none; padding:10px 15px; border-radius:5px; cursor:pointer; }
+button:hover { background:#003580; }
+
+#cart {
+    display:none;
+    position:fixed;
+    right:20px;
+    top:80px;
+    background:#fff;
+    border:1px solid #ccc;
+    width:300px;
+    max-height:400px;
+    overflow-y:auto;
+    padding:15px;
+    border-radius:8px;
+    box-shadow:0 4px 8px rgba(0,0,0,0.2);
+    z-index:999;
+}
+#cart h3 { margin-top:0; }
+.cart-item { border-bottom:1px solid #ddd; padding:10px 0; }
+.cart-item:last-child { border-bottom:none; }
+.remove-btn {
+    color:red;
+    cursor:pointer;
+    font-size:14px;
+    margin-left:10px;
+}
+
+footer { background:#222; color:white; text-align:center; padding:20px; margin-top:30px; font-size:14px; }
+footer p { margin:5px 0; }
+footer a { color:#5de0e6; text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+.social a img { width:20px; vertical-align:middle; }
+</style>
+</head>
+<body>
+
+<header>
+    <img src="LOGOTIPO.jpeg" alt="ACE MAGIC Logo">
+    <h1>ACE MAGIC</h1>
+    <nav>
+        <a href="index.html">Inicio</a> |
+        <a href="nosotros.html">Nosotros</a> |
+        <a href="servicios.html">Servicios</a> |
+        <a href="contacto.html">Contacto</a>
+    </nav>
+    <button class="cart-btn" onclick="toggleCart()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+</header>
+
+<!-- Carrito desplegable -->
+<div id="cart">
+    <h3>Carrito de Compras</h3>
+    <div id="cart-items"></div>
+    <p><strong>Total: </strong>$<span id="cart-total">0</span></p>
+    <button onclick="clearCart()">Vaciar Carrito</button>
+</div>
+
+<section class="products">
+  <div class="product">
+    <img src="img 1.png" alt="ACE MAGIC Classic">
+    <h3>ACE MAGIC Classic</h3>
+    <p>Diseño original con capas de color que se revelan con el uso.</p>
+    <span class="price">350.000 COP</span>
+    <button onclick="addToCart('ACE MAGIC Classic', 350000)">Añadir al carrito</button>
+  </div>
+  <div class="product">
+    <img src="img 2.png" alt="ACE MAGIC Sour Edition">
+    <h3>ACE MAGIC Sour Edition</h3>
+    <p>Edición limitada con combinación de colores única y atrevida.</p>
+    <span class="price">350.000 COP</span>
+    <button onclick="addToCart('ACE MAGIC Sour Edition', 350000)">Añadir al carrito</button>
+  </div>
+  <div class="product">
+    <img src="img 3.png" alt="ACE MAGIC Special">
+    <h3>ACE MAGIC Special</h3>
+    <p>Un estilo especial que mezcla tonos llamativos para destacar.</p>
+    <span class="price">350.000 COP</span>
+    <button onclick="addToCart('ACE MAGIC Special', 350000)">Añadir al carrito</button>
+  </div>
+  <div class="product">
+    <img src="img 4.png" alt="ACE MAGIC Arcoiris">
+    <h3>ACE MAGIC Arcoiris</h3>
+    <p>Un diseño lleno de colores brillantes inspirado en el arcoiris.</p>
+    <span class="price">350.000 COP</span>
+    <button onclick="addToCart('ACE MAGIC Arcoiris', 350000)">Añadir al carrito</button>
+  </div>
+  <div class="product">
+    <img src="img 5.png" alt="ACE MAGIC Black & White">
+    <h3>ACE MAGIC Black & White</h3>
+    <p>Elegancia en negro con detalles desgastados en blanco para un look urbano.</p>
+    <span class="price">350.000 COP</span>
+    <button onclick="addToCart('ACE MAGIC Black & White', 350000)">Añadir al carrito</button>
+  </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 ACE MAGIC - Todos los derechos reservados</p>
+    <p class="social">
+      Síguenos en 
+      <a href="https://instagram.com/ace_magic.official" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+      </a>
+    </p>
+    <p>Email: <a href="mailto:acemagic2112@gmail.com">acemagic2112@gmail.com</a></p>
+    <p>Teléfono: +57 312 375 4035</p>
+</footer>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function updateCart() {
+    const cartItems = document.getElementById("cart-items");
+    const cartCount = document.getElementById("cart-count");
+    const cartTotal = document.getElementById("cart-total");
+
+    cartItems.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, index) => {
+        total += item.price;
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                ${item.name} - $${item.price}
+                <span class="remove-btn" onclick="removeItem(${index})">✖</span>
+            </div>
+        `;
+    });
+
+    cartCount.textContent = cart.length;
+    cartTotal.textContent = total;
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price) {
+    cart.push({ name, price });
+    updateCart();
+    alert("Producto añadido al carrito");
+}
+
+function removeItem(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+function clearCart() {
+    cart = [];
+    updateCart();
+}
+
+function toggleCart() {
+    const cartDiv = document.getElementById("cart");
+    cartDiv.style.display = cartDiv.style.display === "block" ? "none" : "block";
+}
+
+// Inicializa el carrito al cargar
+updateCart();
+</script>
+
+</body>
+</html>
